@@ -248,8 +248,8 @@ function initParallaxEffect() {
   const heroImage = document.querySelector('.hero-image');
   if (!heroImage || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const maxOffset = 18;
-  const speed = 0.08;
+  const PARALLAX_MAX_OFFSET_PX = 18;
+  const PARALLAX_SPEED_FACTOR = 0.08;
   let ticking = false;
 
   heroImage.classList.add('parallax-ready');
@@ -258,8 +258,8 @@ function initParallaxEffect() {
     const rect = heroImage.getBoundingClientRect();
     const viewportCenter = window.innerHeight / 2;
     const elementCenter = rect.top + rect.height / 2;
-    const rawOffset = (viewportCenter - elementCenter) * speed;
-    const offset = Math.max(-maxOffset, Math.min(maxOffset, rawOffset));
+    const rawOffset = (viewportCenter - elementCenter) * PARALLAX_SPEED_FACTOR;
+    const offset = Math.max(-PARALLAX_MAX_OFFSET_PX, Math.min(PARALLAX_MAX_OFFSET_PX, rawOffset));
     heroImage.style.transform = `translate3d(0, ${offset.toFixed(2)}px, 0)`;
     ticking = false;
   }
