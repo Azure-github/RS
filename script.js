@@ -231,15 +231,37 @@ function initMobileMenu() {
   const nav = document.getElementById('main-nav');
   if (!toggle || !nav) return;
 
-  toggle.addEventListener('click', () => {
-    const isOpen = nav.classList.toggle('open');
+  function getMenuLabel(isOpen) {
+    const language = document.documentElement.lang;
+    if (language === 'hu') {
+      return isOpen ? 'Menü bezárása' : 'Menü megnyitása';
+    }
+    return isOpen ? 'Menü schließen' : 'Menü öffnen';
+  }
+
+  function setMenuState(isOpen) {
+    nav.classList.toggle('open', isOpen);
     toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    toggle.setAttribute('aria-label', getMenuLabel(isOpen));
+  }
+
+  setMenuState(false);
+
+  toggle.addEventListener('click', () => {
+    const isOpen = !nav.classList.contains('open');
+    setMenuState(isOpen);
   });
 
   nav.querySelectorAll('a').forEach((link) => {
     link.addEventListener('click', () => {
-      nav.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
+      setMenuState(false);
+    });
+  });
+
+  document.querySelectorAll('.lang-switcher button').forEach((button) => {
+    button.addEventListener('click', () => {
+      const isOpen = nav.classList.contains('open');
+      toggle.setAttribute('aria-label', getMenuLabel(isOpen));
     });
   });
 }
