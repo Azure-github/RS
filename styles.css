@@ -405,7 +405,7 @@ section {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-@media (max-width: 780px) {
+@media (max-width: 780px), (max-width: 1020px) and (hover: none) and (pointer: coarse) {
   .page-shell {
     padding: 1rem;
   }
