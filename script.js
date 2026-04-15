@@ -134,6 +134,15 @@ const translations = {
 const supportedLanguages = ['de', 'hu'];
 const defaultLanguage = 'de';
 
+function getMenuAriaLabel(languageCode, isOpen) {
+  const labels = {
+    de: { open: 'Menü öffnen', close: 'Menü schließen' },
+    hu: { open: 'Menü megnyitása', close: 'Menü bezárása' }
+  };
+  const language = labels[languageCode] || defaultLanguage;
+  return isOpen ? labels[language].close : labels[language].open;
+}
+
 function getBrowserLanguage() {
   const lang = navigator.language || navigator.userLanguage || defaultLanguage;
   const code = lang.toLowerCase().slice(0, 2);
@@ -171,11 +180,7 @@ function applyLanguage(lang) {
   const menuToggle = document.querySelector('.menu-toggle');
   if (menuToggle) {
     const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
-    if (language === 'hu') {
-      menuToggle.setAttribute('aria-label', isOpen ? 'Menü bezárása' : 'Menü megnyitása');
-    } else {
-      menuToggle.setAttribute('aria-label', isOpen ? 'Menü schließen' : 'Menü öffnen');
-    }
+    menuToggle.setAttribute('aria-label', getMenuAriaLabel(language, isOpen));
   }
 }
 
@@ -242,12 +247,7 @@ function initMobileMenu() {
   if (!toggle || !nav) return;
 
   function getMenuLabel(isOpen) {
-    const labels = {
-      de: { open: 'Menü öffnen', close: 'Menü schließen' },
-      hu: { open: 'Menü megnyitása', close: 'Menü bezárása' }
-    };
-    const language = labels[document.documentElement.lang] ? document.documentElement.lang : defaultLanguage;
-    return isOpen ? labels[language].close : labels[language].open;
+    return getMenuAriaLabel(document.documentElement.lang, isOpen);
   }
 
   function setMenuState(isOpen) {
