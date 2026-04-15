@@ -260,8 +260,10 @@ function initMobileMenu() {
 
   document.querySelectorAll('.lang-switcher button').forEach((button) => {
     button.addEventListener('click', () => {
-      const isOpen = nav.classList.contains('open');
-      toggle.setAttribute('aria-label', getMenuLabel(isOpen));
+      window.setTimeout(() => {
+        const isOpen = nav.classList.contains('open');
+        toggle.setAttribute('aria-label', getMenuLabel(isOpen));
+      }, 0);
     });
   });
 }
