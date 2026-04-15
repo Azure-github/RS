@@ -271,7 +271,7 @@ function initParallaxEffect() {
   }
 
   window.addEventListener('scroll', requestUpdate, { passive: true });
-  window.addEventListener('resize', requestUpdate);
+  window.addEventListener('resize', requestUpdate, { passive: true });
   requestUpdate();
 }
 
