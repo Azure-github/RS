@@ -139,8 +139,8 @@ function getMenuAriaLabel(languageCode, isOpen) {
     de: { open: 'Menü öffnen', close: 'Menü schließen' },
     hu: { open: 'Menü megnyitása', close: 'Menü bezárása' }
   };
-  const language = labels[languageCode] || defaultLanguage;
-  return isOpen ? labels[language].close : labels[language].open;
+  const languageLabels = labels[languageCode] || labels[defaultLanguage];
+  return isOpen ? languageLabels.close : languageLabels.open;
 }
 
 function getBrowserLanguage() {
