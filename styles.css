@@ -441,9 +441,10 @@ section {
   }
 
   .toolbar-actions {
-    order: 1;
-    margin-left: auto;
-    margin-right: 0.5rem;
+    order: 2;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .font-size-switcher,
