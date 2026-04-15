@@ -188,7 +188,7 @@ a {
 }
 section {
   padding: 5rem 0 2rem;
-  scroll-margin-top: 0;
+  scroll-margin-top: 5rem;
 }
 
 .section-heading {
@@ -380,8 +380,6 @@ section {
   border: none;
   cursor: pointer;
   padding: 0.5rem;
-  margin-left: auto;
-  order: 2;
 }
 
 .menu-toggle span {
@@ -438,16 +436,17 @@ section {
   .main-nav a {
     display: block;
     padding: 0.75rem 1rem;
+    text-align: left;
+    white-space: normal;
+    overflow-wrap: break-word;
   }
 
   .toolbar-actions {
-    order: 1;
     margin-left: auto;
-    margin-right: 0.5rem;
+    order: 1;
   }
 
-  .font-size-switcher,
-  .lang-switcher {
+  .font-size-switcher {
     width: 100%;
     justify-content: flex-start;
   }
