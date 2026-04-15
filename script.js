@@ -258,8 +258,8 @@ function initParallaxEffect() {
     const rect = heroImage.getBoundingClientRect();
     const viewportCenter = window.innerHeight / 2;
     const elementCenter = rect.top + rect.height / 2;
-    const distanceToCenter = elementCenter - viewportCenter;
-    const offset = Math.max(-maxOffset, Math.min(maxOffset, -distanceToCenter * speed));
+    const rawOffset = (viewportCenter - elementCenter) * speed;
+    const offset = Math.max(-maxOffset, Math.min(maxOffset, rawOffset));
     heroImage.style.transform = `translate3d(0, ${offset.toFixed(2)}px, 0)`;
     ticking = false;
   }
