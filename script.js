@@ -167,6 +167,16 @@ function applyLanguage(lang) {
   document.querySelectorAll('.lang-switcher button').forEach((button) => {
     button.classList.toggle('active', button.dataset.lang === language);
   });
+
+  const menuToggle = document.querySelector('.menu-toggle');
+  if (menuToggle) {
+    const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+    if (language === 'hu') {
+      menuToggle.setAttribute('aria-label', isOpen ? 'Menü bezárása' : 'Menü megnyitása');
+    } else {
+      menuToggle.setAttribute('aria-label', isOpen ? 'Menü schließen' : 'Menü öffnen');
+    }
+  }
 }
 
 function initLanguageSwitcher() {
@@ -232,11 +242,12 @@ function initMobileMenu() {
   if (!toggle || !nav) return;
 
   function getMenuLabel(isOpen) {
-    const language = document.documentElement.lang;
-    if (language === 'hu') {
-      return isOpen ? 'Menü bezárása' : 'Menü megnyitása';
-    }
-    return isOpen ? 'Menü schließen' : 'Menü öffnen';
+    const labels = {
+      de: { open: 'Menü öffnen', close: 'Menü schließen' },
+      hu: { open: 'Menü megnyitása', close: 'Menü bezárása' }
+    };
+    const language = labels[document.documentElement.lang] ? document.documentElement.lang : defaultLanguage;
+    return isOpen ? labels[language].close : labels[language].open;
   }
 
   function setMenuState(isOpen) {
@@ -258,14 +269,6 @@ function initMobileMenu() {
     });
   });
 
-  document.querySelectorAll('.lang-switcher button').forEach((button) => {
-    button.addEventListener('click', () => {
-      window.setTimeout(() => {
-        const isOpen = nav.classList.contains('open');
-        toggle.setAttribute('aria-label', getMenuLabel(isOpen));
-      }, 0);
-    });
-  });
 }
 
 initLanguageSwitcher();
