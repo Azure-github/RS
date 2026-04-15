@@ -181,6 +181,10 @@ a {
   overflow: hidden;
 }
 
+.hero-image.parallax-ready {
+  will-change: transform;
+}
+
 .hero-image svg {
   width: 100%;
   height: 100%;
